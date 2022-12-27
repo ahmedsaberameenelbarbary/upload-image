@@ -1,0 +1,16 @@
+image: atlassian/default-image:2
+
+pipelines:
+  branches:    
+    develop:
+      - step:
+          name: 'Deploy development-refactoring To SEG Server'
+          script:
+            - pipe: atlassian/ssh-run:0.3.0
+              variables:
+                deployment: develop
+                SSH_USER: 'root'
+                PORT: '22'
+                SERVER:  $SEG_SERVER_IP
+                SSH_KEY: $SEG_SSH_KEY
+                COMMAND: 'bash /cib/backend/Picture-Publishing-Service/develop/script/Picture-Publishing-Service-develop.sh ' #
